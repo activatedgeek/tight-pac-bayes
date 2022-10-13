@@ -1,0 +1,41 @@
+name: cifar10-layer13s-datadep
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - 3500
+      - 2000
+      - 500
+      - 250
+      - 100
+      - 50
+      - 30
+      - 10
+      - 5
+  train_subset:
+    values:
+      - .05
+      - .15
+      - .25
+      - .35
+      - .45
+      - .55
+      - .65
+      - .75
+      - .85
+      - .95
+program: experiments/train_dd_priors.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --seed=137
+  - --dataset=cifar10
+  - --model-name=Layer13s
+  - --base-width=8
+  - --optimizer=adam
+  - --epochs=150
+  - --lr=1e-3
+  - --intrinsic-mode=filmrdkronqr
+  - --indices-path=/scratch/sk6876/assets/pactl/ddp-idx/indices_cifar10_137.npy
+  - ${args}

@@ -1,0 +1,37 @@
+name: mnist-lenet5-datadep-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - 250
+      - 500
+      - 750
+      - 1000
+      - 2500
+      - 5000
+      - 7500
+      - 10000
+      - -1
+  seed:
+    values:
+      - 137
+  train_subset:
+    values:
+      - .2
+      - .5
+      - .8
+  indices_path:
+    values:
+      - /scratch/sk6876/assets/pactl/ddp-idx/indices_mnist_137.npy
+program: experiments/train_dd_priors.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=mnist
+  - --model-name=LeNet5
+  - --optimizer=adam
+  - --epochs=250
+  - --intrinsic-mode=dense
+  - --lr=3e-4
+  - ${args}

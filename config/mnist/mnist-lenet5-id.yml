@@ -1,0 +1,31 @@
+name: mnist-lenet5-ID
+method: grid
+parameters:
+  lr:
+    values:
+      - 3e-4
+  intrinsic_dim:
+    values:
+      - -1
+      - 250
+      - 500
+      - 750
+      - 1000
+      - 2500
+      - 5000
+      - 7500
+      - 10000
+  seed:
+    values:
+      - 137
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=mnist
+  - --model-name=LeNet5
+  - --optimizer=adam
+  - --epochs=500
+  - --intrinsic-mode=dense
+  - ${args}

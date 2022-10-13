@@ -1,0 +1,29 @@
+name: imagenet-squeezenet-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - 100000
+  intrinsic_mode:
+    values:
+      - rdkronqr
+  seed:
+    values:
+      - 137
+program: experiments/train.py
+command:
+  - ${env}
+  # - ${interpreter}
+  - torchrun
+  - --nproc_per_node=4
+  - ${program}
+  - --dataset=imagenet
+  - --data-dir=/
+  - --model-name=SqueezeNet
+  - --num-workers=4
+  - --optimizer=ssc
+  - --batch-size=128
+  - --lr=5e-2
+  - --weight-decay=0.
+  - --epochs=100
+  - ${args}

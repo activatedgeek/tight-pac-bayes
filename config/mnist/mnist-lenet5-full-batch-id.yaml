@@ -1,0 +1,33 @@
+name: mnist-lenet5-full-batch-ID
+method: grid
+parameters:
+  lr:
+    values:
+      - 0.1
+  intrinsic_dim:
+    values:
+      - -1
+      - 250
+      - 500
+      - 750
+      - 1000
+      - 2500
+      - 5000
+      - 7500
+      - 10000
+  seed:
+    values:
+      - 137
+program: experiments/train_gd.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=mnist
+  - --model-name=LeNet5
+  - --optimizer=sgd
+  - --weight_decay=1e-3
+  - --epochs=3000
+  - --warmup=10
+  - --intrinsic-mode=dense
+  - ${args}

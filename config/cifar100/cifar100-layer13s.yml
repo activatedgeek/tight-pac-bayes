@@ -1,0 +1,24 @@
+name: cifar100-layer13s
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - -1
+      - 5000
+      - 10000
+      - 15000
+      - 20000
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --seed=137
+  - --dataset=cifar100
+  - --model-name=Layer13s
+  - --base-width=16
+  - --optimizer=adam
+  - --epochs=500
+  - --lr=1e-3
+  - --intrinsic-mode=filmrdkron
+  - ${args}

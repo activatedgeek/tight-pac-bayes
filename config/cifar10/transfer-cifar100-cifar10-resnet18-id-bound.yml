@@ -1,0 +1,50 @@
+name: transfer-cifar100-cifar10-resnet18-ID-bound
+method: grid
+parameters:
+  prenet_cfg_path:
+    values:
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220504-knp7kpmm/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220504-v3nzj7fv/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-xmipmx5c/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-kka00dyu/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-08n3pie3/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-2aq1rbaz/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-baj6ntdp/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-ix2gicib/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-p56azjxc/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-o3f6n8tp/run-20220503-f309p430/files/net.cfg.yml
+  use_kmeans:
+    values:
+      - False
+      - True
+  levels:
+    values:
+      - 20
+      - 50
+      - 10
+      - 100
+  scale_posterior:
+    values:
+      - 1e-3
+      - 5e-3
+      - 1e-2
+      - 5e-2
+  rescale_posterior:
+    values:
+      - True
+      - False
+  quant_epochs:
+    values:
+      - 0
+      - 20
+  misc_extra_bits:  ## Penalty for grid search.
+    values:
+      - 10
+program: experiments/compute_bound.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar10
+  - --encoding-type=arithmetic
+  - ${args}

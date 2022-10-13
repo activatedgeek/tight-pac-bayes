@@ -1,0 +1,42 @@
+name: cifar100-resnet18-datadep-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - 250000
+      - 100000
+      - 50000
+      - 25000
+      - 12000
+      - 10000
+      - 7500
+      - 5000
+      - 2500
+      - 1000
+      - -1
+  intrinsic_mode:
+    values:
+      - rdkron
+  seed:
+    values:
+      - 137
+  train_subset:
+    values:
+      - .2
+      - .5
+      - .8
+  indices_path:
+    values:
+      - /scratch/sk6876/assets/pactl/ddp-idx/indices_cifar100_137.npy
+program: experiments/train_dd_priors.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar100
+  - --model-name=resnet18k
+  - --base-width=64
+  - --optimizer=adam
+  - --epochs=250
+  - --lr=1e-3
+  - ${args}

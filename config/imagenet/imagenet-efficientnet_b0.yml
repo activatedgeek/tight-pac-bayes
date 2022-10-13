@@ -1,0 +1,25 @@
+name: imagenet-efficientnet_b0
+method: grid
+parameters:
+  train_subset:
+    values:
+      - .2
+      - .5
+      - .8
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  # - torchrun
+  # - --nproc_per_node=4
+  - ${program}
+  - --dataset=imagenet
+  - --data-dir=/
+  - --model-name=efficientnet_b0
+  - --num-workers=4
+  - --optimizer=sgd
+  - --batch-size=128
+  - --lr=5e-2
+  - --weight-decay=2e-5
+  - --epochs=80
+  - ${args}

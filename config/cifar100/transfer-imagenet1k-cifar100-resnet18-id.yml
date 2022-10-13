@@ -1,0 +1,37 @@
+name: transfer-imagenet1k-cifar100-resnet18-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - 250000
+      - 100000
+      - 50000
+      - 25000
+      - 12000
+      - 10000
+      - 7500
+      - 5000
+      - 2500
+      - 1000
+      - -1
+  intrinsic_mode:
+    values:
+      - filmrdkron
+  seed:
+    values:
+      - 137
+  cfg_path:
+    values:
+      - /scratch/sk6876/assets/pactl/imagenet1k-resnet18/net.cfg.yml
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar100
+  - --model-name=resnet18k
+  - --base-width=64
+  - --optimizer=adam
+  - --epochs=500
+  - --lr=1e-3
+  - ${args}

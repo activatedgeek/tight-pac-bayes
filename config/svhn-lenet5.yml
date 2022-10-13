@@ -1,0 +1,16 @@
+name: svhn-lenet5
+method: grid
+parameters:
+  lr:
+    values:
+      - 3e-4
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=svhn
+  - --model-name=LeNet5
+  - --optimizer=adam
+  - --epochs=500
+  - ${args}

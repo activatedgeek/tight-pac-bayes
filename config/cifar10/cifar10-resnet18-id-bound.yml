@@ -1,0 +1,50 @@
+name: cifar10-resnet18-ID-bound
+method: grid
+parameters:
+  prenet_cfg_path:
+    values:
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-xi56ukqs/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-n6rgljtp/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-msz2wplf/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-6hv88zpc/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-dgnux9gw/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-mgiswhok/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-7enknn0v/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-u34h9vzo/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-vequ5sor/files/net.cfg.yml
+      - /data/users/sanyam_s/assets/pactl/sweep-dmfgb38q/run-20220503-npavlecr/files/net.cfg.yml
+  use_kmeans:
+    values:
+      - False
+      - True
+  levels:
+    values:
+      - 20
+      - 50
+      - 10
+      - 100
+  scale_posterior:
+    values:
+      - 1e-3
+      - 5e-3
+      - 1e-2
+      - 5e-2
+  rescale_posterior:
+    values:
+      - True
+      - False
+  quant_epochs:
+    values:
+      - 0
+      - 20
+  misc_extra_bits:  ## Penalty for grid search.
+    values:
+      - 10
+program: experiments/compute_bound.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar10
+  - --encoding-type=arithmetic
+  - ${args}

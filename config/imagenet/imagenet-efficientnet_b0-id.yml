@@ -1,0 +1,32 @@
+name: imagenet-efficientnet_b0-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      # - 100000
+      - 500000
+      # - 800000
+  intrinsic_mode:
+    values:
+      - rdkron
+      # - filmrdkron
+  seed:
+    values:
+      - 137
+program: experiments/train.py
+command:
+  - ${env}
+  # - ${interpreter}
+  - torchrun
+  - --nproc_per_node=4
+  - ${program}
+  - --dataset=imagenet
+  - --data-dir=/
+  - --model-name=efficientnet_b0
+  - --num-workers=4
+  - --optimizer=sgd
+  - --batch-size=128
+  - --lr=5e-2
+  - --weight-decay=2e-5
+  - --epochs=500
+  - ${args}

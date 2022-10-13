@@ -1,0 +1,35 @@
+name: transfer-cifar10-fmnist-resnet20-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - -1
+      - 250000
+      - 100000
+      - 50000
+      - 25000
+      - 12000
+      - 10000
+      - 7500
+      - 5000
+      - 2500
+      - 1000
+  intrinsic_mode:
+    values:
+      - rdkron
+  seed:
+    values:
+      - 137
+  prenet_cfg_path:
+    values:
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/pactl/sweep-ga3t318p/run-20220501-65pge19x/files/net.cfg.yml
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=fmnist
+  - --optimizer=adam
+  - --epochs=500
+  - --lr=1e-3
+  - ${args}

@@ -1,0 +1,50 @@
+name: fmnist-resnet20-ID-bound
+method: grid
+parameters:
+  prenet_cfg_path:
+    values:
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220503-x8ao2sf9/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220503-njsbiwtv/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220503-jbq75ylq/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-j9um0zoh/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-zti2xbpu/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-2juldgn5/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-39ku6tb2/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-742kw6d2/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-77cp4za3/files/net.cfg.yml
+      - /misc/vlgscratch5/WilsonGroup/sanyam/assets/sweep-pk2qdbkc/run-20220502-i7bwhx2n/files/net.cfg.yml
+  use_kmeans:
+    values:
+      - False
+      - True
+  levels:
+    values:
+      - 20
+      - 50
+      - 10
+      - 100
+  scale_posterior:
+    values:
+      - 1e-3
+      - 5e-3
+      - 1e-2
+      - 5e-2
+  rescale_posterior:
+    values:
+      - True
+      - False
+  quant_epochs:
+    values:
+      - 0
+      - 20
+  misc_extra_bits:  ## Penalty for grid search.
+    values:
+      - 10
+program: experiments/compute_bound.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=fmnist
+  - --encoding-type=arithmetic
+  - ${args}

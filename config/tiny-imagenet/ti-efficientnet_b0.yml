@@ -1,0 +1,28 @@
+name: ti-efficientnet_b0
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - -1
+      - 5000
+      - 10000
+      - 15000
+      - 20000
+      - 50000
+      - 100000
+      - 250000
+      - 500000
+      - 1000000
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --seed=137
+  - --dataset=tiny-imagenet
+  - --model-name=efficientnet_b0
+  - --optimizer=adam
+  - --epochs=200
+  - --lr=1e-3
+  - --intrinsic-mode=filmrdkron
+  - ${args}

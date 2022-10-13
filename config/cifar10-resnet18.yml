@@ -1,0 +1,46 @@
+name: cifar10-resnet18
+method: grid
+parameters:
+  base_width:
+    values:
+      - 64
+      - 48
+      - 40
+      - 32
+      - 30
+      - 28
+      - 26
+      - 24
+      - 22
+      - 20
+      - 18
+      - 16
+      - 14
+      - 12
+      - 10
+      - 8
+      - 6
+      - 4
+      - 2
+      - 1
+  train_subset:
+    values:
+      - 1
+      - .1
+  label_noise:
+    values:
+      - 0.
+      - .1
+      - .2
+      - .4
+      - .5
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
+  - --dataset=cifar10
+  - --optimizer=adam
+  - --epochs=4000
+  - --lr=1e-4

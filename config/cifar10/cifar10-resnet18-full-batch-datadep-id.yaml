@@ -1,0 +1,43 @@
+name: cifar10-resnet18-full-batch-datadep-ID
+method: grid
+parameters:
+  intrinsic_dim:
+    values:
+      - 250000
+      - 100000
+      - 50000
+      - 25000
+      - 12000
+      - 10000
+      - 7500
+      - 5000
+      - 2500
+      - 1000
+      - -1
+  intrinsic_mode:
+    values:
+      - rdkron
+  seed:
+    values:
+      - 137
+  train_subset:
+    values:
+      - .5
+      - .8
+  indices_path:
+    values:
+      - /scratch/sk6876/assets/pactl/ddp-idx/indices_cifar10_137.npy
+program: experiments/train_dd_fb_priors.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar10
+  - --model-name=resnet18k
+  - --base-width=64
+  - --optimizer=sgd
+  - --epochs=3000
+  - --lr=0.1
+  - --warmup=10
+  - --weight_decay=1e-3
+  - ${args}

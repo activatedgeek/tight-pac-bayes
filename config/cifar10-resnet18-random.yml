@@ -1,0 +1,30 @@
+name: cifar10-resnet18-random
+method: grid
+parameters:
+  base_width:
+    values:
+      - 64
+      - 32
+      - 16
+      - 8
+      - 4
+      - 2
+      - 1
+  label_noise:
+    values:
+      - 1.
+  seed:
+    values:
+      - 13
+      - 29
+      - 113
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar10
+  - --optimizer=adam
+  - --epochs=1000
+  - --lr=1e-4
+  - ${args}

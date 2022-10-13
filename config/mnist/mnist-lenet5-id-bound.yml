@@ -1,0 +1,48 @@
+name: mnist-lenet5-ID-bound
+method: grid
+parameters:
+  prenet_cfg_path:
+    values:
+      - /data/sanyam_s/assets/pactl/sweep-epumflim/run-20220429-t8217cj5/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-epumflim/run-20220429-mw1iuwc8/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-epumflim/run-20220429-hrlfc57v/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-epumflim/run-20220429-akr1egow/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-lz5otmy1/run-20220430-e6ufpnii/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-lz5otmy1/run-20220430-zdxww584/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-lz5otmy1/run-20220430-wltn5f3b/files/net.cfg.yml
+      - /data/sanyam_s/assets/pactl/sweep-lz5otmy1/run-20220430-08vmxk4r/files/net.cfg.yml
+  use_kmeans:
+    values:
+      - False
+      - True
+  levels:
+    values:
+      - 20
+      - 50
+      - 10
+      - 100
+  scale_posterior:
+    values:
+      - 1e-3
+      - 5e-3
+      - 1e-2
+      - 5e-2
+  rescale_posterior:
+    values:
+      - True
+      - False
+  quant_epochs:
+    values:
+      - 0
+      - 20
+  misc_extra_bits:  ## Penalty for grid search.
+    values:
+      - 10
+program: experiments/compute_bound.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=mnist
+  - --encoding-type=arithmetic
+  - ${args}

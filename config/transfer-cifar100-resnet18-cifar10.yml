@@ -1,0 +1,46 @@
+name: transfer-cifar100-resnet18-cifar10
+method: grid
+parameters:
+  prenet_cfg_path:
+    values:
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-q2m7qq2v/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-ve3gghlh/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220419-o3pzsia7/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-17uccepu/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-v3bp18c1/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-axehskni/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-fzy5bbon/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-nxbu1qts/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-9wk73edv/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-b1pkqy54/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-uxqwdngt/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-v5u3ajbf/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-2bpwx6ki/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-cok3xxy2/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-hx42vwq8/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-19u2ts84/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-9o9u1ixh/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-5f1guz87/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220419-zmlvcxjv/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-n9c1eclg/files/net.cfg.yml
+  train_subset:
+    values:
+      - 1
+      - .1
+  label_noise:
+    values:
+      - 0.
+      - .1
+      - .2
+      - .4
+      - .5
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
+  - --dataset=cifar10
+  - --optimizer=adam
+  - --epochs=4000
+  - --lr=1e-4

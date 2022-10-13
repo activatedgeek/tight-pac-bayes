@@ -1,0 +1,30 @@
+name: transfer-cifar100-resnet18-cifar10-random
+method: grid
+parameters:
+  prenet_cfg_path:
+    values:
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-b1pkqy54/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-5f1guz87/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-cok3xxy2/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-uxqwdngt/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-q2m7qq2v/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220420-19u2ts84/files/net.cfg.yml
+      - /scratch/sk6876/assets/pactl/sweep-slh0ppmu/run-20220419-zmlvcxjv/files/net.cfg.yml
+  label_noise:
+    values:
+      - 1.
+  seed:
+    values:
+      - 13
+      - 29
+      - 113
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar10
+  - --optimizer=adam
+  - --epochs=1000
+  - --lr=1e-4
+  - ${args}

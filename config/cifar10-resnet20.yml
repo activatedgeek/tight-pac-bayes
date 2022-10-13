@@ -1,0 +1,19 @@
+name: cifar10-resnet20
+method: grid
+parameters:
+  base_width:
+    values:
+      - 16
+      - 32
+      - 64
+program: experiments/train.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - --dataset=cifar10
+  - --model-name=resnet20
+  - --optimizer=sgd
+  - --epochs=500
+  - --lr=1e-2
+  - ${args}
